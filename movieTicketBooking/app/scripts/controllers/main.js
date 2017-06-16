@@ -7,11 +7,9 @@
  * # MainCtrl
  * Controller of the greatApp
  */
-angular.module('greatApp')
-  .controller('MainCtrl', function () {
-    this.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
+angular.module('greatApp',[])
+  .controller('MainCtrl', function ($scope, $http) {
+    $http.get('http://localhost:8080/movie/getAll').then(function(response) {
+      $scope.movies = response.data;
+    });
   });
