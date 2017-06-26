@@ -7,12 +7,22 @@ package org.movie.theatre.services;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import org.movie.theatre.models.dao.BookingDAO;
+import org.movie.theatre.models.dao.CreditDAO;
+import org.movie.theatre.models.dao.MobileDAO;
 import org.movie.theatre.models.dao.MoviesDAO;
 import org.movie.theatre.models.dao.TheatreDAO;
 import org.movie.theatre.models.dao.UsersDAO;
+import org.movie.theatre.models.dto.BookingDTO;
+import org.movie.theatre.models.dto.CreditDTO;
+import org.movie.theatre.models.dto.MobileDTO;
 import org.movie.theatre.models.dto.MovieDTO;
 import org.movie.theatre.models.dto.TheatreDTO;
 import org.movie.theatre.models.dto.UsersDTO;
+import org.movie.theatre.repositories.BookingRepository;
+import org.movie.theatre.repositories.CreditRepository;
+import org.movie.theatre.repositories.MobileRepository;
 import org.movie.theatre.repositories.MovieRepository;
 import org.movie.theatre.repositories.TheatreRepository;
 import org.movie.theatre.repositories.UserRepository;
@@ -55,30 +65,6 @@ public class TheatreService {
     @Autowired
     private UserRepository userRepo;
 
-//    public void addUser(UsersDTO item){
-//
-//        Iterable<UsersDAO> users = userRepo.findAll();
-//
-//        List<UsersDTO> userResponse = new ArrayList<>();
-//        List<UsersDAO> userList = new ArrayList<>();
-//
-//        for(UsersDAO user : users){
-//            UsersDTO userDTO = new UsersDTO(user.getUserID(), user.getEmail(),user.getUsername(), user.getPassword());
-//            userResponse.add(userDTO);
-//        }
-//
-//        userResponse.add(item);
-//
-//        for(UsersDTO user : userResponse){
-//            UsersDAO userDAO = new UsersDAO(user.getUserID(), user.getEmail(),user.getUsername(), user.getPassword());
-//            userList.add(userDAO);
-//        }
-//
-//        Iterable<UsersDAO> iterable = userList;
-//
-//        UsersDAO xxx = new UsersDAO();
-//        userRepo.save(xxx);
-//    }
 
     //Service to add a new user to the database
     public void addUser(UsersDTO user){
@@ -104,5 +90,35 @@ public class TheatreService {
             }
         }
         return false;
+    }
+
+    @Autowired
+    private BookingRepository bookingRepo;
+
+    //Service to add a ticket booking to the database
+    public void addBooking(BookingDTO booking){
+
+        BookingDAO bookingDAO = new BookingDAO(booking.getMovie(),booking.getTheatre(), booking.getSeatNo(),booking.getSeatNo());
+        bookingRepo.save(bookingDAO);
+    }
+
+    @Autowired
+    private CreditRepository creditRepo;
+
+    //Service to add a credit card payment to the database
+    public void addCredit(CreditDTO credit){
+
+        CreditDAO creditDAO = new CreditDAO(credit.getCCNo(),credit.getAmount(), credit.getCVCNo(),credit.getName());
+        creditRepo.save(creditDAO);
+    }
+
+    @Autowired
+    private MobileRepository mobileRepo;
+
+    //Service to add a mobile payment to the database
+    public void addMobile(MobileDTO mobile){
+
+        MobileDAO mobileDAO = new MobileDAO(mobile.getMobileNo(),mobile.getPin(), mobile.getAmount());
+        mobileRepo.save(mobileDAO);
     }
 }

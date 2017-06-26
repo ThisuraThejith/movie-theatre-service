@@ -26,4 +26,19 @@ public class Constants {
         public static final String GET_USER = "/validate";
     }
 
+    public static class Booking{
+        public static final String BOOKINGCONTROLLER = "/booking";
+        public static final String ADD_BOOKING = "/add";
+    }
+
+    public static class Credit{
+        public static final String CREDITCONTROLLER = "/credit";
+        public static final String ADD_CREDIT = "/add";
+    }
+
+    public static class Mobile{
+        public static final String MOBILECONTROLLER = "/mobile";
+        public static final String ADD_MOBILE = "/add";
+    }
+
 }
