@@ -7,6 +7,7 @@ package org.movie.theatre.controllers;
 
 import java.util.List;
 import org.movie.theatre.models.dto.MovieDTO;
+import org.movie.theatre.models.dto.TheatreDTO;
 import org.movie.theatre.services.TheatreService;
 import org.movie.theatre.utils.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,9 +25,10 @@ public class MovieController {
     @Autowired
     private TheatreService theatreService;
 
-    @CrossOrigin(origins = "http://localhost:9000")
+    @CrossOrigin
     @RequestMapping(value=Constants.Movie.GET_MOVIES, method=RequestMethod.GET, produces = "application/json")
     public List<MovieDTO> getMovies(){
         return theatreService.getMovies(); 
     }
+
 }
